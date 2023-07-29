@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "flex-end",
-    // background: "lightgray 50%",
     width: "100%",
   },
 });

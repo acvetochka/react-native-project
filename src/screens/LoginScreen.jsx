@@ -1,32 +1,29 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Background } from "../components/Background";
-import { Avatar } from "../components/Avatar";
-import { RegistrationForm } from "../components/RegistrationForm";
-import { FormButton } from "../components/FormButton";
+import { FormInput } from "../components/FormInput";
 import { Title } from "../components/Title";
+import { FormButton } from "../components/FormButton";
+import { PassInput } from "../components/PassInput";
 
-export const RegistrationScreen = () => {
+export const LoginScreen = () => {
   return (
     <Background>
       <View style={styles.wrapper}>
-        <Avatar />
-        <Title title="Реєстрація" />
-        <RegistrationForm />
-        <FormButton text="Зареєструватися" />
-        <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+        <Title title="Увійти" />
+        <FormInput placeholder="Адреса електронної пошти" />
+        <PassInput />
+        <FormButton text="Увійти" />
+        <Text style={styles.link}>Немає аккаунту? Зареєструватись</Text>
       </View>
     </Background>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   wrapper: {
-    height: "70%",
+    height: "60%",
     backgroundColor: "white",
-    paddingTop: 92,
+    paddingTop: 32,
     paddingHorizontal: 16,
     position: "relative",
     width: "100%",
