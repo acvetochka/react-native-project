@@ -1,16 +1,14 @@
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import grid from "../assets/images/grid.png";
-import userIcon from "../assets/images/userIcon.png";
-import union from "../assets/images/UnionIcon.png";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 export const Menu = () => {
   return (
     <View style={styles.menuWrap}>
-      <Image source={grid} />
+      <Feather name="grid" size={24} style={styles.icon} />
       <TouchableOpacity style={styles.unionButton}>
-        <Image source={union} />
+        <Feather name="plus" size={13} style={styles.plusIcon} />
       </TouchableOpacity>
-      <Image source={userIcon} />
+      <Feather name="user" size={24} style={styles.icon} />
     </View>
   );
 };
@@ -18,7 +16,7 @@ export const Menu = () => {
 const styles = StyleSheet.create({
   menuWrap: {
     width: "100%",
-    display: "flex",
+    // display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -33,9 +31,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
     width: 70,
     height: 40,
-    display: "flex",
+    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+  },
+
+  icon: {
+    color: "#21212180",
+  },
+
+  plusIcon: {
+    color: "#fff",
   },
 });

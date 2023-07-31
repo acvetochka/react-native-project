@@ -17,7 +17,7 @@ export const UserInfo = () => {
 const styles = StyleSheet.create({
   userWrapper: {
     paddingHorizontal: 16,
-    display: "flex",
+    // display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: 8,

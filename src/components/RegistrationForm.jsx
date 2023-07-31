@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import { FormInput } from "./FormInput";
+import { PassInput } from "./PassInput";
 
 export const RegistrationForm = () => {
   return (
     <>
-      <FormInput placeholder="Логін" />
-      <FormInput placeholder="Адреса електронної пошти" />
+      <FormInput name="login" placeholder="Логін" />
+      <FormInput name="email" placeholder="Адреса електронної пошти" />
       <View>
-        <FormInput placeholder="Пароль" />
-        <Text style={styles.show}>Показати</Text>
+        <PassInput />
       </View>
     </>
   );

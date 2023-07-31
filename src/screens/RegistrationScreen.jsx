@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    height: "70%",
+    // height: "70%",
     backgroundColor: "white",
     paddingTop: 92,
     paddingHorizontal: 16,
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    paddingBottom: 30,
   },
 
   link: {

@@ -10,7 +10,7 @@ export const LoginScreen = () => {
     <Background>
       <View style={styles.wrapper}>
         <Title title="Увійти" />
-        <FormInput placeholder="Адреса електронної пошти" />
+        <FormInput name="email" placeholder="Адреса електронної пошти" />
         <PassInput />
         <FormButton text="Увійти" />
         <Text style={styles.link}>Немає аккаунту? Зареєструватись</Text>
@@ -21,7 +21,7 @@ export const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: "60%",
+    // height: "60%",
     backgroundColor: "white",
     paddingTop: 32,
     paddingHorizontal: 16,
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    paddingBottom: 50,
   },
 
   link: {

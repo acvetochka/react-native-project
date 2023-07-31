@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from "react-native";
-import add from "../assets/images/add.png";
+import { Feather } from "@expo/vector-icons";
 
 export const Avatar = () => {
   return (
@@ -7,7 +7,7 @@ export const Avatar = () => {
       <View style={styles.imageWrapper}>
         <Image source={null} style={styles.image} />
       </View>
-      <Image source={add} style={styles.icon} />
+      <Feather name="plus-circle" size={25} style={styles.icon} />
     </View>
   );
 };
@@ -16,20 +16,19 @@ const styles = StyleSheet.create({
   wrap: {
     position: "absolute",
     top: -60,
-    left: "50%",
-    transform: [{ translateX: -50 }],
+    alignSelf: "center",
   },
 
   imageWrapper: {
     backgroundColor: "#F6F6F6",
     borderRadius: 16,
-    borderColor: "#000",
-    borderWidth: 1,
+    // borderColor: "#000",
+    // borderWidth: 1,
     overflow: "hidden",
-    shadowColor: "#000",
-    shadowRadius: 20,
-    shadowOffset: { width: 10, height: 10 },
-    elevation: 5,
+    // shadowColor: "#000",
+    // shadowRadius: 20,
+    // shadowOffset: { width: 10, height: 10 },
+    // elevation: 5,
   },
 
   image: {
@@ -45,5 +44,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: -12.5,
     bottom: 14,
+    color: "#FF6C00",
   },
 });
