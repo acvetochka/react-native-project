@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: '500',
-    // fontFamily: "Roboto_500Medium",
     textAlign: 'center',
   },
 

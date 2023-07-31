@@ -1,6 +1,6 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from 'react-native';
 
-import user from "../assets/images/User.png";
+import user from '../assets/images/User.png';
 
 export const UserInfo = () => {
   return (
@@ -17,11 +17,10 @@ export const UserInfo = () => {
 const styles = StyleSheet.create({
   userWrapper: {
     paddingHorizontal: 16,
-    // display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
-    marginBottom: "auto",
+    marginBottom: 'auto',
   },
 
   userImage: {
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
 
   user: {
     fontSize: 13,
-    fontWeight: "700",
+    fontWeight: '700',
   },
 
   email: {

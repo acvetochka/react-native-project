@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Background } from "../components/Background";
-import { FormInput } from "../components/FormInput";
-import { Title } from "../components/Title";
-import { FormButton } from "../components/FormButton";
-import { PassInput } from "../components/PassInput";
+import { StyleSheet, Text, View } from 'react-native';
+import { Background } from '../components/Background';
+import { FormInput } from '../components/FormInput';
+import { Title } from '../components/Title';
+import { FormButton } from '../components/FormButton';
+import { PassInput } from '../components/PassInput';
 
 export const LoginScreen = () => {
   return (
@@ -21,19 +21,18 @@ export const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    // height: "60%",
-    backgroundColor: "white",
+    backgroundColor: 'white',
     paddingTop: 32,
     paddingHorizontal: 16,
-    position: "relative",
-    width: "100%",
+    position: 'relative',
+    width: '100%',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingBottom: 50,
   },
 
   link: {
-    textAlign: "center",
-    color: "#1B4371",
+    textAlign: 'center',
+    color: '#1B4371',
   },
 });

@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Background } from "../components/Background";
-import { Avatar } from "../components/Avatar";
-import { RegistrationForm } from "../components/RegistrationForm";
-import { FormButton } from "../components/FormButton";
-import { Title } from "../components/Title";
+import { StyleSheet, Text, View } from 'react-native';
+import { Background } from '../components/Background';
+import { Avatar } from '../components/Avatar';
+import { RegistrationForm } from '../components/RegistrationForm';
+import { FormButton } from '../components/FormButton';
+import { Title } from '../components/Title';
 
 export const RegistrationScreen = () => {
   return (
@@ -24,19 +24,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    // height: "70%",
-    backgroundColor: "white",
+    backgroundColor: 'white',
     paddingTop: 92,
     paddingHorizontal: 16,
-    position: "relative",
-    width: "100%",
+    position: 'relative',
+    width: '100%',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingBottom: 30,
   },
 
   link: {
-    textAlign: "center",
-    color: "#1B4371",
+    textAlign: 'center',
+    color: '#1B4371',
   },
 });

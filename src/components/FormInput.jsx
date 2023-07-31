@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-FormInput.PropTypes = {
+FormInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

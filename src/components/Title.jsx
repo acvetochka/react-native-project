@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   title: {
     color: '#212121',
     fontSize: 30,
-    // fontWeight: "500",
     fontFamily: 'Roboto_500Medium',
     letterSpacing: 0.3,
     textAlign: 'center',
@@ -17,6 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-Title.PropTypes = {
+Title.propTypes = {
   title: PropTypes.string.isRequired,
 };
