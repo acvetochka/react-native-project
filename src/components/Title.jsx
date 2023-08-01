@@ -1,5 +1,4 @@
 import { StyleSheet, Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 export const Title = ({ title }) => {
   return <Text style={styles.title}>{title}</Text>;
@@ -15,7 +14,3 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
 });
-
-Title.propTypes = {
-  title: PropTypes.string.isRequired,
-};

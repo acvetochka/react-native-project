@@ -1,9 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 
-export const FormButton = ({ text }) => {
+export const FormButton = ({ text, onPress }) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );
@@ -24,7 +23,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-
-FormButton.propTypes = {
-  text: PropTypes.string.isRequired,
-};

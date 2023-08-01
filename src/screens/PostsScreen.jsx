@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { UserInfo } from '../components/UserInfo';
 import { Menu } from '../components/Menu';
 import { Feather } from '@expo/vector-icons';

@@ -1,20 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { Background } from '../components/Background';
-import { FormInput } from '../components/FormInput';
 import { Title } from '../components/Title';
-import { FormButton } from '../components/FormButton';
-import { PassInput } from '../components/PassInput';
+import { LoginForm } from '../components/LoginForm';
 
 export const LoginScreen = () => {
   return (
     <Background>
-      <View style={styles.wrapper}>
-        <Title title="Увійти" />
-        <FormInput name="email" placeholder="Адреса електронної пошти" />
-        <PassInput />
-        <FormButton text="Увійти" />
-        <Text style={styles.link}>Немає аккаунту? Зареєструватись</Text>
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.wrapper}>
+          <Title title="Увійти" />
+          <LoginForm />
+        </View>
+      </TouchableWithoutFeedback>
     </Background>
   );
 };
@@ -29,10 +31,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingBottom: 50,
-  },
-
-  link: {
-    textAlign: 'center',
-    color: '#1B4371',
   },
 });

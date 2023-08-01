@@ -1,5 +1,4 @@
 import { ImageBackground, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 import BackgroundImage from '../assets/images/PhotoBG.png';
 
@@ -24,7 +23,3 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
-
-Background.propTypes = {
-  children: PropTypes.node.isRequired,
-};

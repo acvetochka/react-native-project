@@ -1,4 +1,4 @@
-// import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
   Roboto_400Regular,
@@ -24,9 +24,10 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      {/* <RegistrationScreen /> */}
+      <LoginScreen />
       {/* <PostsScreen /> */}
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }

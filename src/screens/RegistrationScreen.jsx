@@ -1,20 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
 import { RegistrationForm } from '../components/RegistrationForm';
-import { FormButton } from '../components/FormButton';
 import { Title } from '../components/Title';
 
 export const RegistrationScreen = () => {
   return (
     <Background>
-      <View style={styles.wrapper}>
-        <Avatar />
-        <Title title="Реєстрація" />
-        <RegistrationForm />
-        <FormButton text="Зареєструватися" />
-        <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.wrapper}>
+          <Avatar />
+          <Title title="Реєстрація" />
+          <RegistrationForm />
+          <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+        </View>
+      </TouchableWithoutFeedback>
     </Background>
   );
 };

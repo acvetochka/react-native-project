@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-export const PassInput = () => {
+export const PassInput = ({ onChange, value }) => {
   const [visiblePass, setVisiblePass] = useState(true);
   const [focus, setFocus] = useState(null);
 
@@ -25,6 +25,8 @@ export const PassInput = () => {
         secureTextEntry={visiblePass}
         onFocus={() => setFocus('password')}
         onBlur={() => setFocus(null)}
+        onChangeText={onChange}
+        value={value}
       />
       <TouchableOpacity onPress={showPassword} style={styles.show}>
         <Text>{visiblePass ? 'Показати' : 'Приховати'}</Text>

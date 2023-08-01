@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
-export const FormInput = ({ placeholder, name }) => {
+export const FormInput = ({ placeholder, name, onChange, value }) => {
   const [focus, setFocus] = useState(null);
+
   return (
     <TextInput
       style={[styles.input, focus === name && styles.activeInput]}
@@ -11,6 +11,8 @@ export const FormInput = ({ placeholder, name }) => {
       placeholder={placeholder}
       onFocus={() => setFocus(name)}
       onBlur={() => setFocus(null)}
+      onChangeText={onChange}
+      value={value}
     />
   );
 };
@@ -32,8 +34,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-
-FormInput.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};
