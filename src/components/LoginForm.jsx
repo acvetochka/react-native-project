@@ -4,6 +4,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import { FormInput } from './FormInput';
 import { PassInput } from './PassInput';
@@ -29,9 +30,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-    >
+    <View>
       <FormInput
         name="email"
         placeholder="Адреса електронної пошти"
@@ -41,11 +40,14 @@ export const LoginForm = () => {
       <PassInput onChange={setPassword} value={password} />
       <FormButton text="Увійти" onPress={onLogin} />
       <Text style={styles.link}>Немає аккаунту? Зареєструватись</Text>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   link: {
     textAlign: 'center',
     color: '#1B4371',

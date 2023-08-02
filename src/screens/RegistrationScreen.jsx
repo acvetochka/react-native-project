@@ -1,5 +1,7 @@
 import {
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -12,16 +14,25 @@ import { Title } from '../components/Title';
 
 export const RegistrationScreen = () => {
   return (
-    <Background>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.wrapper}>
-          <Avatar />
-          <Title title="Реєстрація" />
-          <RegistrationForm />
-          <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-        </View>
-      </TouchableWithoutFeedback>
-    </Background>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={-120}
+        style={styles.container}
+      >
+        {/* <View style={styles.container}> */}
+        <Background>
+          <View style={styles.wrapper}>
+            <Avatar />
+            <Title title="Реєстрація" />
+            <RegistrationForm />
+            <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+          </View>
+          {/* </KeyboardAvoidingView> */}
+        </Background>
+        {/* </View> */}
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 

@@ -32,26 +32,22 @@ export const RegistrationForm = () => {
 
   return (
     <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-      >
-        <FormInput
-          name="login"
-          placeholder="Логін"
-          onChange={setLogin}
-          value={login}
-        />
-        <FormInput
-          name="email"
-          placeholder="Адреса електронної пошти"
-          onChange={setEmail}
-          value={email}
-        />
-        <View>
-          <PassInput onChange={setPassword} value={password} />
-        </View>
-        <FormButton text="Зареєструватися" onPress={onLogin} />
-      </KeyboardAvoidingView>
+      <FormInput
+        name="login"
+        placeholder="Логін"
+        onChange={setLogin}
+        value={login}
+      />
+      <FormInput
+        name="email"
+        placeholder="Адреса електронної пошти"
+        onChange={setEmail}
+        value={email}
+      />
+      <View>
+        <PassInput onChange={setPassword} value={password} />
+      </View>
+      <FormButton text="Зареєструватися" onPress={onLogin} />
     </>
   );
 };

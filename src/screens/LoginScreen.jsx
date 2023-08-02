@@ -1,5 +1,7 @@
 import {
   Keyboard,
+  KeyboardAvoidingView,
+  // Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -10,18 +12,31 @@ import { LoginForm } from '../components/LoginForm';
 
 export const LoginScreen = () => {
   return (
-    <Background>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.wrapper}>
-          <Title title="Увійти" />
-          <LoginForm />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={-150}
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <Background>
+            <View style={styles.wrapper}>
+              <Title title="Увійти" />
+              <LoginForm />
+            </View>
+            {/* </KeyboardAvoidingView> */}
+          </Background>
         </View>
-      </TouchableWithoutFeedback>
-    </Background>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: '#fff',
+  },
   wrapper: {
     backgroundColor: 'white',
     paddingTop: 32,
