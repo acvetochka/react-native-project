@@ -7,12 +7,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
 import { RegistrationForm } from '../components/RegistrationForm';
 import { Title } from '../components/Title';
 
 export const RegistrationScreen = () => {
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -20,17 +23,22 @@ export const RegistrationScreen = () => {
         keyboardVerticalOffset={-120}
         style={styles.container}
       >
-        {/* <View style={styles.container}> */}
         <Background>
           <View style={styles.wrapper}>
-            <Avatar />
+            <Avatar photo={ null} />
             <Title title="Реєстрація" />
             <RegistrationForm />
-            <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+            <View style={styles.linkWrapper}>
+              <Text style={styles.link}>Вже є акаунт?</Text>
+              <Text
+                style={styles.linkActive}
+                onPress={() => navigation.navigate('Login')}
+              >
+                Увійти
+              </Text>
+            </View>
           </View>
-          {/* </KeyboardAvoidingView> */}
         </Background>
-        {/* </View> */}
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -50,9 +58,18 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     paddingBottom: 30,
   },
-
+  linkWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 5,
+  },
   link: {
-    textAlign: 'center',
     color: '#1B4371',
+  },
+  linkActive: {
+    color: '#1B4371',
+    textDecorationColor: '#1B4371',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
   },
 });

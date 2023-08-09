@@ -1,26 +1,22 @@
-import {
-  Alert,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { FormInput } from './FormInput';
 import { PassInput } from './PassInput';
 import { useState } from 'react';
 import { FormButton } from './FormButton';
+import { useNavigation } from '@react-navigation/native';
 
 export const RegistrationForm = () => {
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const onLogin = () => {
     if (!email || !login || !password) {
       Alert.alert('Please, complete all fields');
       return;
     }
-    console.log({ email, login, password });
+    navigation.navigate('Home');
     reset();
   };
 

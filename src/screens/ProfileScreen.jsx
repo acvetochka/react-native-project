@@ -1,42 +1,35 @@
 import {
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { Background } from '../components/Background';
-import { Title } from '../components/Title';
-import { LoginForm } from '../components/LoginForm';
 import { useNavigation } from '@react-navigation/native';
 
-export const LoginScreen = () => {
-  const navigation = useNavigation();
+import { Background } from '../components/Background';
+import { Avatar } from '../components/Avatar';
+import { RegistrationForm } from '../components/RegistrationForm';
+import { Title } from '../components/Title';
+
+import user from '../assets/images/User.png';
+
+export const ProfileScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={-150}
+        keyboardVerticalOffset={-120}
         style={styles.container}
       >
-        <View style={styles.container}>
-          <Background>
-            <View style={styles.wrapper}>
-              <Title title="Увійти" />
-              <LoginForm />
-              <View style={styles.linkWrapper}>
-                <Text style={styles.link}>Немає аккаунту?</Text>
-                <Text
-                  style={styles.linkActive}
-                  onPress={() => navigation.navigate('Registration')}
-                >
-                  Зареєструватись
-                </Text>
-              </View>
-            </View>
-          </Background>
-        </View>
+        <Background>
+          <View style={styles.wrapper}>
+            <Avatar photo={user} />
+            <Title title="Natali Romanova" />
+          </View>
+        </Background>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -45,17 +38,16 @@ export const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
   },
   wrapper: {
     backgroundColor: 'white',
-    paddingTop: 32,
+    paddingTop: 92,
     paddingHorizontal: 16,
     position: 'relative',
     width: '100%',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingBottom: 50,
+    paddingBottom: 30,
   },
   linkWrapper: {
     flexDirection: 'row',

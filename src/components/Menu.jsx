@@ -16,7 +16,6 @@ export const Menu = () => {
 const styles = StyleSheet.create({
   menuWrap: {
     width: '100%',
-    // display: "flex",
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

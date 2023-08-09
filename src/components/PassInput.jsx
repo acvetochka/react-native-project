@@ -29,7 +29,9 @@ export const PassInput = ({ onChange, value }) => {
         value={value}
       />
       <TouchableOpacity onPress={showPassword} style={styles.show}>
-        <Text>{visiblePass ? 'Показати' : 'Приховати'}</Text>
+        <Text style={styles.showText}>
+          {visiblePass ? 'Показати' : 'Приховати'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -57,6 +59,8 @@ const styles = StyleSheet.create({
     right: 16,
     top: '100%',
     transform: [{ translateY: -50 }],
+  },
+  showText: {
     color: '#1B4371',
   },
 });
