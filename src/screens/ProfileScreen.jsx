@@ -7,11 +7,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
-import { RegistrationForm } from '../components/RegistrationForm';
 import { Title } from '../components/Title';
 
 import user from '../assets/images/User.png';
