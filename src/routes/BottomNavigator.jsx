@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -34,10 +34,12 @@ export const BottomNavigation = () => {
         name="Posts"
         component={PostsScreen}
         options={() => ({
-          tabBarIcon: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Posts')}>
-              <Feather name="grid" size={24} style={styles.icon} />
-            </TouchableOpacity>
+          tabBarIcon: ({ focused }) => (
+            <Feather
+              name="grid"
+              size={24}
+              style={[styles.icon, focused && { color: '#FF6C00' }]}
+            />
           ),
           title: 'Публікації',
           headerTitleAlign: 'center',
@@ -52,13 +54,10 @@ export const BottomNavigation = () => {
         name="CreatePost"
         component={CreatePostScreen}
         options={() => ({
-          tabBarIcon: () => (
-            <TouchableOpacity
-              style={styles.unionButton}
-              onPress={() => navigation.navigate('CreatePost')}
-            >
-              <Feather name="plus" size={13} style={styles.plusIcon} />
-            </TouchableOpacity>
+          tabBarIcon: ({ focused, size }) => (
+            <View style={styles.unionButton}>
+              <Feather name="plus" size={size} style={styles.plusIcon} />
+            </View>
           ),
           tabBarStyle: {
             display: 'none',
@@ -77,10 +76,12 @@ export const BottomNavigation = () => {
         component={ProfileScreen}
         options={() => ({
           headerShown: false,
-          tabBarIcon: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-              <Feather name="user" size={24} style={styles.icon} />
-            </TouchableOpacity>
+          tabBarIcon: ({ focused }) => (
+            <Feather
+              name="user"
+              size={24}
+              style={[styles.icon, focused && { color: '#FF6C00' }]}
+            />
           ),
         })}
       />

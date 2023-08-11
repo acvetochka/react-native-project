@@ -48,12 +48,12 @@ export const RegistrationForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  show: {
-    position: 'absolute',
-    right: 16,
-    top: '100%',
-    transform: [{ translateY: -50 }],
-    color: '#1B4371',
-  },
-});
+// const styles = StyleSheet.create({
+//   show: {
+//     position: 'absolute',
+//     right: 16,
+//     top: '100%',
+//     transform: [{ translateY: -50 }],
+//     color: '#1B4371',
+//   },
+// });

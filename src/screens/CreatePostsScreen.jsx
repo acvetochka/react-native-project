@@ -1,7 +1,6 @@
 import {
   Keyboard,
   KeyboardAvoidingView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -25,7 +24,7 @@ export const CreatePostScreen = () => {
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
-        <ScrollView style={styles.wrapper}>
+        <View style={styles.wrapper}>
           <View style={styles.imageWrapper}>
             <View style={styles.circle}>
               <MaterialIcons
@@ -74,11 +73,10 @@ export const CreatePostScreen = () => {
               Опублікувати
             </Text>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.trashButton}>
-            <Feather name="trash-2" size={24} color="#BDBDBD" />
-          </TouchableOpacity>
-        </ScrollView>
+        </View>
+        <TouchableOpacity style={styles.trashButton}>
+          <Feather name="trash-2" size={24} color="#BDBDBD" />
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -87,10 +85,14 @@ export const CreatePostScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%',
+    minHeight: '100hv',
+    backgroundColor: '#fff',
+    paddingBottom: 20,
+    justifyContent: 'space-between',
   },
   wrapper: {
     width: '100%',
-    backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingVertical: 32,
   },
@@ -111,12 +113,10 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 50,
-    // borderRadius: '50%',
     backgroundColor: '#fff',
   },
   iconCamera: {
     // color: '##BDBDBD',
-    //   position: 'absolute',
   },
   text: {
     color: '#BDBDBD',
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     width: '100%',
     borderRadius: 100,
-    marginBottom: 20,
   },
   activeButton: {
     backgroundColor: '#FF6C00',
@@ -169,6 +168,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginBottom: 10,
+    marginTop: 'auto',
   },
 });
