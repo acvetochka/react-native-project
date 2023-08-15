@@ -1,16 +1,21 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export const Posts = ({ item }) => {
-  const { photo, title, comments, likes, location } = item;
+  const navigation = useNavigation();
+  const { photo, title, comments, likes, place, location } = item;
   return (
     <View style={styles.container}>
       <Image source={photo} style={styles.image}></Image>
       <Text style={styles.text}>{title}</Text>
       <View style={styles.description}>
         <View style={styles.rating}>
-          <View style={styles.iconWrapper}>
+          <TouchableOpacity
+            style={styles.iconWrapper}
+            onPress={() => navigation.navigate('Comments')}
+          >
             <FontAwesome
               name={comments ? 'comment' : 'comment-o'}
               size={24}
@@ -20,7 +25,7 @@ export const Posts = ({ item }) => {
               ]}
             />
             <Text style={styles.text}>{comments}</Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.iconWrapper}>
             <Feather
               name="thumbs-up"
@@ -31,8 +36,12 @@ export const Posts = ({ item }) => {
           </View>
         </View>
         <View style={styles.locateWrapper}>
-          <Feather name="map-pin" size={18} color="#BDBDBD" />
-          <Text style={[styles.text, styles.location]}>{location}</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Map', { location })}
+          >
+            <Feather name="map-pin" size={18} color="#BDBDBD" />
+          </TouchableOpacity>
+          <Text style={[styles.text, styles.location]}>{place}</Text>
         </View>
       </View>
     </View>

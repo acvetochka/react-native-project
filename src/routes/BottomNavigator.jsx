@@ -1,27 +1,38 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  useNavigation,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { PostsScreen } from '../screens/PostsScreen';
 import { CreatePostScreen } from '../screens/CreatePostsScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
+import { PostsNavigator } from './PostsNavigator';
 
 const Tabs = createBottomTabNavigator();
+
+const getRoute = route => {
+  const routeName = getFocusedRouteNameFromRoute(route);
+  if (routeName === 'Comments') {
+    return { display: 'none' };
+  }
+  return {
+    justifyContent: 'center',
+    height: 60,
+    paddingHorizontal: 80,
+  };
+};
 
 export const BottomNavigation = () => {
   const navigation = useNavigation();
   return (
     <Tabs.Navigator
       initialRouteName="Posts"
-      screenOptions={() => ({
+      screenOptions={({ route }) => ({
         tabBarShowLabel: false,
-        tabBarStyle: {
-          justifyContent: 'center',
-          height: 60,
-          paddingHorizontal: 80,
-        },
+        tabBarStyle: getRoute(route),
         headerStyle: {
           backgroundColor: '#FFF',
           borderBottomColor: '#e8e8e8',
@@ -32,7 +43,7 @@ export const BottomNavigation = () => {
     >
       <Tabs.Screen
         name="Posts"
-        component={PostsScreen}
+        component={PostsNavigator}
         options={() => ({
           tabBarIcon: ({ focused }) => (
             <Feather
@@ -41,13 +52,9 @@ export const BottomNavigation = () => {
               style={[styles.icon, focused && { color: '#FF6C00' }]}
             />
           ),
-          title: 'Публікації',
-          headerTitleAlign: 'center',
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Feather name="log-out" size={24} style={styles.iconLogout} />
-            </TouchableOpacity>
-          ),
+
+          headerShown: false,
+          headerBackVisible: false,
         })}
       />
       <Tabs.Screen

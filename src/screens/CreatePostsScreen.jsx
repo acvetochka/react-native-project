@@ -1,4 +1,5 @@
 import {
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
@@ -9,14 +10,77 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Location from 'expo-location';
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
+import { posts } from '../data/posts';
+import { useNavigation } from '@react-navigation/native';
 
 export const CreatePostScreen = () => {
-  //   const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState('');
+  // const [postArr, setPostArr] = useState(posts);
   const [title, setTitle] = useState('');
   const [locate, setLocate] = useState('');
   const disable = !(title && locate);
+  const [location, setLocation] = useState(null);
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
+
+      setHasPermission(status === 'granted');
+    })();
+
+    getLocation();
+  }, []);
+
+  const getLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    const coords = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    };
+    setLocation(coords);
+  };
+
+  const takePhoto = async () => {
+    if (cameraRef) {
+      const { uri } = await cameraRef.takePictureAsync();
+      await MediaLibrary.createAssetAsync(uri);
+      await getLocation();
+      setPhoto(uri);
+    }
+  };
+
+  const addPost = () => {
+    const post = {
+      id: Math.random(),
+      photo: { uri: photo },
+      title,
+      comments: 0,
+      likes: 0,
+      place: locate,
+      location,
+    };
+    posts.push(post);
+    setPhoto('');
+    setTitle('');
+    setLocate('');
+
+    navigation.navigate('PostsScreen', { post });
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -26,16 +90,40 @@ export const CreatePostScreen = () => {
       >
         <View style={styles.wrapper}>
           <View style={styles.imageWrapper}>
-            <View style={styles.circle}>
-              <MaterialIcons
-                name="camera-alt"
-                size={24}
-                color={'#BDBDBD'}
-                style={styles.iconCamera}
-              />
-            </View>
+            {photo ? (
+              <Image source={{ uri: photo }} style={styles.camera} />
+            ) : (
+              <Camera style={styles.camera} type={type} ref={setCameraRef}>
+                <TouchableOpacity onPress={takePhoto} style={styles.circle}>
+                  <MaterialIcons
+                    name="camera-alt"
+                    size={24}
+                    color={'#BDBDBD'}
+                    style={styles.iconCamera}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setType(
+                      type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back
+                    );
+                  }}
+                  style={styles.flip}
+                >
+                  <MaterialIcons
+                    name="flip-camera-ios"
+                    size={24}
+                    color="#BDBDBD"
+                  />
+                </TouchableOpacity>
+              </Camera>
+            )}
           </View>
-          <Text style={styles.text}>Завантажте фото</Text>
+          <Text style={styles.text}>
+            {photo ? 'Peдагувати фото' : 'Завантажте фото'}
+          </Text>
           <View style={styles.inputWrapper}>
             <TextInput
               name="name"
@@ -68,6 +156,7 @@ export const CreatePostScreen = () => {
               styles.button,
               disable ? styles.disabledButton : styles.activeButton,
             ]}
+            onPress={addPost}
           >
             <Text style={[styles.buttonText, !disable && { color: '#FFFFFF' }]}>
               Опублікувати
@@ -91,6 +180,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     justifyContent: 'space-between',
   },
+  camera: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   wrapper: {
     width: '100%',
     paddingHorizontal: 16,
@@ -102,21 +195,28 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderWidth: 1,
     borderRadius: 8,
+    overflow: 'hidden',
     justifyContent: 'center',
     marginBottom: 8,
   },
   circle: {
-    position: 'absolute',
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     width: 60,
     height: 60,
     borderRadius: 50,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff50',
   },
   iconCamera: {
     // color: '##BDBDBD',
+  },
+  flip: {
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+    zIndex: 999,
+    // alignSelf: 'flex-end',
   },
   text: {
     color: '#BDBDBD',

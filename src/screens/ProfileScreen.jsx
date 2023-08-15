@@ -5,46 +5,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
 import { Title } from '../components/Title';
-
-import user from '../assets/images/User.png';
-import photo1 from '../assets/images/photo1.png';
-import photo2 from '../assets/images/photo2.png';
-import photo3 from '../assets/images/photo3.png';
 import { Posts } from '../components/Posts';
+import { posts } from '../data/posts';
+import user from '../assets/images/User.png';
 import { Feather } from '@expo/vector-icons';
 
-export const postArray = [
-  {
-    id: 1,
-    photo: photo1,
-    title: 'Ліс',
-    comments: 0,
-    likes: 0,
-    location: 'Ukraine',
-  },
-  {
-    id: 2,
-    photo: photo2,
-    title: 'Захід на Чорному морі',
-    comments: 3,
-    likes: 200,
-    location: 'Ukraine',
-  },
-  {
-    id: 3,
-    photo: photo3,
-    title: 'Старий будиночок у Венеції',
-    comments: 50,
-    likes: 200,
-    location: 'Italy',
-  },
-];
-
 export const ProfileScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <Background>
@@ -59,11 +32,12 @@ export const ProfileScreen = () => {
                 <Feather name="log-out" size={24} style={styles.iconLogout} />
               </TouchableOpacity>
               <Title title="Natali Romanova" />
-                 </View>
+            </View>
           }
-          data={postArray}
+          data={posts}
           renderItem={({ item }) => <Posts item={item} />}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
         />
       </Background>
     </SafeAreaView>

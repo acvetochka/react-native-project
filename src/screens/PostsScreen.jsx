@@ -1,17 +1,19 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
 import { UserInfo } from '../components/UserInfo';
 import { Posts } from '../components/Posts';
-import { postArray } from './ProfileScreen';
+import { posts } from '../data/posts';
 
 export const PostsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
-        <UserInfo/>
+        <UserInfo />
         <FlatList
-          data={postArray}
+          data={posts}
           renderItem={({ item }) => <Posts item={item} />}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>
@@ -27,5 +29,4 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#fff',
   },
-
 });
