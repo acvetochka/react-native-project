@@ -76,6 +76,7 @@ export const BottomNavigation = () => {
               <AntDesign name="arrowleft" size={24} style={styles.iconArrow} />
             </TouchableOpacity>
           ),
+          unmountOnBlur: true,
         })}
       />
       <Tabs.Screen

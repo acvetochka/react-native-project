@@ -32,35 +32,50 @@ export const CreatePostScreen = () => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      await MediaLibrary.requestPermissionsAsync();
+      try {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        await MediaLibrary.requestPermissionsAsync();
 
-      setHasPermission(status === 'granted');
+        setHasPermission(status === 'granted');
+      } catch (err) {
+        console.log(err.message);
+        navigation.navigate('Home');
+      }
     })();
 
     getLocation();
   }, []);
 
   const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.log('Permission to access location was denied');
-    }
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+      }
 
-    let location = await Location.getCurrentPositionAsync({});
-    const coords = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    };
-    setLocation(coords);
+      let location = await Location.getCurrentPositionAsync({});
+      const coords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+      setLocation(coords);
+    } catch (err) {
+      console.log(err.message);
+      navigation.navigate('Home');
+    }
   };
 
   const takePhoto = async () => {
-    if (cameraRef) {
-      const { uri } = await cameraRef.takePictureAsync();
-      await MediaLibrary.createAssetAsync(uri);
-      await getLocation();
-      setPhoto(uri);
+    try {
+      if (cameraRef) {
+        const { uri } = await cameraRef.takePictureAsync();
+        await MediaLibrary.createAssetAsync(uri);
+        await getLocation();
+        setPhoto(uri);
+      }
+    } catch (err) {
+      console.log(err.message);
+      navigation.navigate('Home');
     }
   };
 
@@ -75,11 +90,15 @@ export const CreatePostScreen = () => {
       location,
     };
     posts.push(post);
+    deleteAll();
+
+    navigation.navigate('PostsScreen', { post });
+  };
+
+  const deleteAll = () => {
     setPhoto('');
     setTitle('');
     setLocate('');
-
-    navigation.navigate('PostsScreen', { post });
   };
 
   return (
@@ -163,7 +182,7 @@ export const CreatePostScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.trashButton}>
+        <TouchableOpacity style={styles.trashButton} onPress={deleteAll}>
           <Feather name="trash-2" size={24} color="#BDBDBD" />
         </TouchableOpacity>
       </KeyboardAvoidingView>

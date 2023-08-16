@@ -35,13 +35,14 @@ export const Posts = ({ item }) => {
             <Text style={styles.text}>{likes}</Text>
           </View>
         </View>
-        <View style={styles.locateWrapper}>
+        <View>
           <TouchableOpacity
+            style={styles.locateWrapper}
             onPress={() => navigation.navigate('Map', { location })}
           >
             <Feather name="map-pin" size={18} color="#BDBDBD" />
+            <Text style={[styles.text, styles.location]}>{place}</Text>
           </TouchableOpacity>
-          <Text style={[styles.text, styles.location]}>{place}</Text>
         </View>
       </View>
     </View>
