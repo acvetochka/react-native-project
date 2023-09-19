@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Image,
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,15 +11,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Location from 'expo-location';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+
 import { posts } from '../data/posts';
-import { useNavigation } from '@react-navigation/native';
 
 export const CreatePostScreen = () => {
   const [photo, setPhoto] = useState('');
@@ -28,6 +31,7 @@ export const CreatePostScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -37,6 +41,9 @@ export const CreatePostScreen = () => {
         await MediaLibrary.requestPermissionsAsync();
 
         setHasPermission(status === 'granted');
+        // setTimeout(() => {
+        //   setIsLoading(false);
+        // }, 2000);
       } catch (err) {
         console.log(err.message);
         navigation.navigate('Home');
@@ -68,6 +75,7 @@ export const CreatePostScreen = () => {
   const takePhoto = async () => {
     try {
       if (cameraRef) {
+        setIsLoading(true);
         const { uri } = await cameraRef.takePictureAsync();
         await MediaLibrary.createAssetAsync(uri);
         await getLocation();
@@ -76,7 +84,13 @@ export const CreatePostScreen = () => {
     } catch (err) {
       console.log(err.message);
       navigation.navigate('Home');
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const deletePhoto = () => {
+    setPhoto('');
   };
 
   const addPost = () => {
@@ -110,16 +124,44 @@ export const CreatePostScreen = () => {
         <View style={styles.wrapper}>
           <View style={styles.imageWrapper}>
             {photo ? (
-              <Image source={{ uri: photo }} style={styles.camera} />
-            ) : (
-              <Camera style={styles.camera} type={type} ref={setCameraRef}>
-                <TouchableOpacity onPress={takePhoto} style={styles.circle}>
+              // <View style={styles.camera}>
+
+              <ImageBackground source={{ uri: photo }} style={styles.camera}>
+                <TouchableOpacity
+                  onPress={deletePhoto}
+                  style={[styles.circle, styles.circleDelete]}
+                >
                   <MaterialIcons
-                    name="camera-alt"
+                    name="delete"
                     size={24}
                     color={'#BDBDBD'}
                     style={styles.iconCamera}
                   />
+                </TouchableOpacity>
+              </ImageBackground>
+            ) : (
+              // </View>
+              <Camera style={styles.camera} type={type} ref={setCameraRef}>
+                {/* {isLoading === true && photo && <Loader />} */}
+
+                <TouchableOpacity
+                  onPress={takePhoto}
+                  disabled={isLoading}
+                  style={[
+                    styles.circle,
+                    isLoading && { pointerEvents: 'none' },
+                  ]}
+                >
+                  {isLoading ? (
+                    <ActivityIndicator size="small" color="#FFf" />
+                  ) : (
+                    <MaterialIcons
+                      name="camera-alt"
+                      size={24}
+                      color={'#BDBDBD'}
+                      style={styles.iconCamera}
+                    />
+                  )}
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
@@ -203,6 +245,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  // photo: {
+  //   justifyContent: 'center',
+  //   zIndex: 999,
+  // },
   wrapper: {
     width: '100%',
     paddingHorizontal: 16,
@@ -227,9 +273,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: '#ffffff50',
   },
+  circleDelete: {
+    backgroundColor: '#ffffff30',
+  },
   iconCamera: {
     // color: '##BDBDBD',
   },
+
   flip: {
     position: 'absolute',
     right: 10,
