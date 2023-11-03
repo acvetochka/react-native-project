@@ -4,6 +4,9 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 // import { getAnalytics } from 'firebase/analytics';
 
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAJsz264IqZjfMGIiBZ5YyHwjQDLP0vdtY',
   authDomain: 'imagesocial-7c628.firebaseapp.com',
@@ -17,6 +20,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+// const auth = initializeAuth(app, {
+//   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+// });
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 // const analytics = getAnalytics(app);

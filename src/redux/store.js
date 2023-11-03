@@ -23,15 +23,16 @@ const store = configureStore({
   reducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
     }),
 });
 
 const persistor = persistStore(store);
 
-export default { store, persistor };
+export { store, persistor };
 
 // import { configureStore, combineReducers } from '@reduxjs/toolkit';
 

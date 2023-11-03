@@ -10,9 +10,22 @@ import { Background } from '../components/Background';
 import { Title } from '../components/Title';
 import { LoginForm } from '../components/LoginForm';
 import { useNavigation } from '@react-navigation/native';
+import { logIn } from '../redux/auth/authOperations';
+import { useEffect } from 'react';
+import { getIsAuth } from '../redux/auth/authSelectors';
+import { useSelector } from 'react-redux';
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
+  const isAuth = useSelector(getIsAuth);
+
+  useEffect(() => {
+    console.log('isAUth', isAuth);
+    if (isAuth) {
+      navigation.navigate('Home');
+    }
+  }, [isAuth]);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView

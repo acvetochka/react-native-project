@@ -4,6 +4,7 @@ import { UserInfo } from '../components/UserInfo';
 import { Posts } from '../components/Posts';
 import { posts } from '../data/posts';
 
+
 export const PostsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>

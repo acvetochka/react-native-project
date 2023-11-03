@@ -4,19 +4,37 @@ import { PassInput } from './PassInput';
 import { useState } from 'react';
 import { FormButton } from './FormButton';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/auth/authOperations';
+import { getIsAuth } from '../redux/auth/authSelectors';
 
-export const RegistrationForm = () => {
+export const RegistrationForm = ({ avatar }) => {
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  // const [avatar, setAvatar] = useState(null);
+  const isAuth = useSelector(getIsAuth);
+  const dispatch = useDispatch();
+
   const navigation = useNavigation();
+  // console.log(navigation);
 
   const onLogin = () => {
     if (!email || !login || !password) {
       Alert.alert('Please, complete all fields');
       return;
     }
-    navigation.navigate('Home');
+    const user = { email, login, password, avatar };
+    // console.log(user);
+    dispatch(register(user));
+    // navigation.navigate('Posts');
+    // if (isAuth) {
+    //   navigation.reset({
+    //     index: 0,
+    //     routes: [{ name: 'Posts' }],
+    //   });
+    // }
+
     reset();
   };
 
@@ -24,6 +42,7 @@ export const RegistrationForm = () => {
     setEmail('');
     setLogin('');
     setPassword('');
+    // setAvatar(null)
   };
 
   return (

@@ -13,9 +13,23 @@ import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
 import { RegistrationForm } from '../components/RegistrationForm';
 import { Title } from '../components/Title';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getIsAuth } from '../redux/auth/authSelectors';
 
 export const RegistrationScreen = () => {
+  const [avatar, setAvatar] = useState(null);
+  const isAuth = useSelector(getIsAuth);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    console.log('isAUth', isAuth);
+    if (isAuth) {
+      navigation.navigate('Home');
+    }
+  }, [isAuth]);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -25,9 +39,9 @@ export const RegistrationScreen = () => {
       >
         <Background>
           <View style={styles.wrapper}>
-            <Avatar photo={ null} />
+            <Avatar avatar={avatar} setAvatar={setAvatar} />
             <Title title="Реєстрація" />
-            <RegistrationForm />
+            <RegistrationForm avatar={avatar} />
             <View style={styles.linkWrapper}>
               <Text style={styles.link}>Вже є акаунт?</Text>
               <Text

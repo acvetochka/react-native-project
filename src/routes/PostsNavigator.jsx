@@ -1,17 +1,22 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { MapScreen } from '../screens/MapScreen';
 import { PostsScreen } from '../screens/PostsScreen';
 import { CommentsScreen } from '../screens/CommentsScreen';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { getIsAuth } from '../redux/auth/authSelectors';
+import { logOut } from '../redux/auth/authOperations';
 
 const PostsStack = createStackNavigator();
 
 export const PostsNavigator = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   return (
     <PostsStack.Navigator
       initialRouteName="PostsScreen"
@@ -33,7 +38,8 @@ export const PostsNavigator = () => {
           title: 'Публікації',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            // <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => dispatch(logOut())}>
               <Feather name="log-out" size={24} style={styles.iconLogout} />
             </TouchableOpacity>
           ),

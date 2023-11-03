@@ -3,20 +3,25 @@ import { FormInput } from './FormInput';
 import { PassInput } from './PassInput';
 import { FormButton } from './FormButton';
 import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
+import { logIn } from '../redux/auth/authOperations';
+import { useDispatch } from 'react-redux';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const onLogin = () => {
     if (!email || !password) {
       Alert.alert('Please, complete all fields');
       return;
     }
-    navigation.navigate('Home');
-    console.log({ email, password });
+    const user = { email, password };
+    // navigation.navigate('Home');
+    // console.log(user);
+    dispatch(logIn(user));
     reset();
   };
 

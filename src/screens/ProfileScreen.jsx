@@ -6,6 +6,16 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import {
+  getLogin,
+  getEmail,
+  getAvatar,
+  getId,
+} from '../redux/auth/authSelectors';
+import { updateProfile } from 'firebase/auth';
 
 import { Background } from '../components/Background';
 import { Avatar } from '../components/Avatar';
@@ -14,9 +24,14 @@ import { Posts } from '../components/Posts';
 import { posts } from '../data/posts';
 import user from '../assets/images/User.png';
 import { Feather } from '@expo/vector-icons';
+import { updateUser } from '../redux/auth/authOperations';
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
+  // const dispatch = useDispatch();
+  const login = useSelector(getLogin);
+  const avatar = useSelector(getAvatar);
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,14 +39,16 @@ export const ProfileScreen = () => {
         <FlatList
           ListHeaderComponent={
             <View style={styles.wrapper}>
-              <Avatar photo={user} />
+              {/* <Avatar photo={user} /> */}
+              <Avatar avatar={avatar} />
               <TouchableOpacity
                 style={styles.logout}
                 onPress={() => navigation.goBack()}
               >
                 <Feather name="log-out" size={24} style={styles.iconLogout} />
               </TouchableOpacity>
-              <Title title="Natali Romanova" />
+              <Title title={login} />
+              {/* <Title title="Natali Romanova" /> */}
             </View>
           }
           data={posts}
